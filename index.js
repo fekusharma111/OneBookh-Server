@@ -16,7 +16,7 @@ app.use(
 );
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/", router);
+app.use("/api", router);
 
 const db_url = process.env.MONGO_URI;
 connection(db_url);
