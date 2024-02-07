@@ -5,19 +5,20 @@ export const mailSender = async (email, title, body) => {
     console.log("sending mail here", email, process.env.MAIL_HOST, process.env.MAIL_USER, process.env.MAIL_PASS);
     //to send email ->  firstly create a Transporter
     let transporter = nodemailer.createTransport({
+      service: "gmail",
       host: process.env.MAIL_HOST, //-> Host SMTP detail
       port: 587,
-      secure: false,
+      secure: true,
       auth: {
-        user: process.env.MAIL_USER, //-> User's mail for authentication
-        pass: process.env.MAIL_PASS, //-> User's password for authentication
+        user: "fekusharma111@gmail.com", //-> User's mail for authentication
+        pass: "woho vgct olkt taif", //-> User's password for authentication
       },
     });
 
     //now Send e-mails to users
     let info = await transporter.sendMail({
       from: "socialdesign1988@gmail.com",
-      to: `${email}`,
+      to: "fekufekusharma@gmail.com", //`${email}`,
       subject: `${title}`,
       html: `${body}`,
     });
