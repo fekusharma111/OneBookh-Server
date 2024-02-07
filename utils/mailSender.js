@@ -10,15 +10,15 @@ export const mailSender = async (email, title, body) => {
       port: 587,
       secure: true,
       auth: {
-        user: "fekusharma111@gmail.com", //-> User's mail for authentication
-        pass: "woho vgct olkt taif", //-> User's password for authentication
+        user: process.env.MAIL_ID, //-> User's mail for authentication
+        pass: process.env.MAIL_USER, //-> User's password for authentication
       },
     });
 
     //now Send e-mails to users
     let info = await transporter.sendMail({
-      from: "socialdesign1988@gmail.com",
-      to: "fekufekusharma@gmail.com", //`${email}`,
+      from: process.env.MAIL_ID,
+      to: `${email}`,
       subject: `${title}`,
       html: `${body}`,
     });
