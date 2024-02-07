@@ -8,10 +8,10 @@ export const mailSender = async (email, title, body) => {
       service: "gmail",
       host: process.env.MAIL_HOST, //-> Host SMTP detail
       port: 587,
-      secure: true,
+      secure: false,
       auth: {
         user: process.env.MAIL_ID, //-> User's mail for authentication
-        pass: process.env.MAIL_USER, //-> User's password for authentication
+        pass: process.env.MAIL_PASS, //-> User's password for authentication
       },
     });
 

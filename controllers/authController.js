@@ -4,9 +4,9 @@ import OTPModel from "../models/otpModel.js";
 
 export const signup = async (req, res) => {
   try {
-    const { name, email, password, role, otp } = req.body;
-    // Check if all details are provided
-    if (!name || !email || !password || !otp) {
+    const { email, password, otp } = req.body;
+    const role = req.body.role || "User";
+    if (!email || !password || !otp) {
       return res.status(403).json({
         success: false,
         message: "All fields are required",
@@ -22,7 +22,7 @@ export const signup = async (req, res) => {
     }
     // Find the most recent OTP for the email
     const response = await OTPModel.find({ email }).sort({ createdAt: -1 }).limit(1);
-    if (response.length === 0 || otp !== response[0].otp) {
+    if (response.length === 0 || parseInt(otp) !== parseInt(response[0].otp)) {
       return res.status(400).json({
         success: false,
         message: "The OTP is not valid",
@@ -39,10 +39,11 @@ export const signup = async (req, res) => {
       });
     }
     const newUser = await User.create({
-      name,
+      name: `${email.match(/^(.+)@/)[1]}`,
       email,
       password: hashedPassword,
       role,
+      lastloginTime: Date.now(),
     });
     return res.status(201).json({
       success: true,

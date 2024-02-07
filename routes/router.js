@@ -1,10 +1,11 @@
 import express from "express";
-import { sendOTP } from "../controllers/otpController.js";
+import { sendOTP, verifyOTP } from "../controllers/otpController.js";
 import { signup } from "../controllers/authController.js";
 
 const router = express.Router();
 
 router.post("/send-otp", sendOTP);
+// router.post("/verify-otp", verifyOTP);
 router.post("/signup", signup);
 
 // router.post("/login", loginUser);
